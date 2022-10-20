@@ -116,6 +116,26 @@
 			</select>
 		</p>
 		<p>
+			<label for="merge_sub" translation="__merge_sub__">合并字幕</label>
+
+			<select class="settings_element" name="subtitle_type" style="margin-left:10px;" translation="__title:sub_index_promt__" title="sub index">
+				<option value="NONE" selected>无</option>
+				<option value="CHS">简体中文</option>
+				<option value="CHT">繁體中文</option>
+				<option value="EN">English</option>
+				<option value="JP">Japanese</option>
+			</select>
+		</p>
+		<p>
+			<label for="hard_acc" translation="__hard_acc__">视频编码硬件加速</label>
+
+			<select class="settings_element" name="hard_acc" style="margin-left:10px;" translation="__title:hard_acc_promt__" title="hard acc">
+				<option value="NONE" selected>不使用</option>
+				<option value="nvdia_gpu">Nvdia独显</option>
+				<option value="intel_gpu">Intel集显</option>
+			</select>
+		</p>
+		<p>
 			<input type="checkbox" id="delete_after_merge" name="delete_after_merge" class="settings_element">
 			<label for="delete_after_merge" translation="__delete_after_merge__">Delete unnecessary files after merging</label>
 		</p>

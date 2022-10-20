@@ -1,42 +1,95 @@
-<h1 align="center">GI-Cutscenes UI</h1>
+# GI-Cutscenes UI - mod 原神剧情动画导出GUI工具
+-- modified by yohsinw
 
-<p align="center">
-    <img src="github/images/icons/UI/ui-1.png" height="200px" align="center">
-</p>
-<p align="center">
-    <strong> User Interface for <a href="https://github.com/ToaHartor/GI-cutscenes">Genshin Cutscenes Demuxer</a></strong>
-</p>
-<p align="center">
-    <img src="https://shields.io/badge/version-v0.4.3.1-blue">
-</p>
+> 本项目为[ToaHartor/GI-cutscenes](https://github.com/ToaHartor/GI-cutscenes)命令行工具的GUI版，fork自[SuperZombi/GICutscenesUI](https://github.com/SuperZombi/GICutscenesUI)，并做一定修改：
+> 1. 使用ffmpeg合并视频、音频时，可选Nvdia/Intel GPU加速(自测比原作纯CPU方案约快3-5倍);
+> 2. 合并视频、音频可选合并多语言字幕。
 
-## Screenshots:
-<details>
-  <summary></summary>
-  <img src="github/images/main.png" width="550px">
-  <img src="github/images/settings.png" width="550px">
-  <img src="github/images/animation_low.gif">
-</details>
+## 使用方法
 
-## Usage:
-1. Download [GI-cutscenes](https://github.com/ToaHartor/GI-cutscenes)
-2. Download UI from [Releases](https://github.com/SuperZombi/GICutscenesUI/releases) or click ```Download ZIP```
-3. Start ```GICutscenesUI.exe```
+### 1. 下载命令行工具
 
-## Requirements:
-1. [Ffmpeg](https://ffmpeg.org/)
-2. [Eel](https://pypi.org/project/Eel/)
-3. [JSON-minify](https://pypi.org/project/JSON_minify/)
+下载地址: [ToaHartor/GI-cutscenes](https://github.com/ToaHartor/GI-cutscenes)
 
-## FAQ
-### 1) I have an error in merging video
-Try to update your ffmpeg to the latest version. Most likely you are using an old version (which is installed by default), which does not support the VP9 codec.
+推荐下载`standalone`版，如`GICutscenes-xxx-win-x64-standalone.zip`版本，并解压;
 
+## 2. 下载安装FFmpeg
 
-<br>
+下载地址：[FFmpeg build by BtbN](https://github.com/BtbN/FFmpeg-Builds/releases)
 
-### Help with <a href="translations.md">translation</a>
+推荐下载`gpl`版，如`ffmpeg-master-latest-win64-gpl.zip`, 解压到某一目录，然后将`bin`目录添加到环境变量，如下：
 
-<hr>
+![FFmpeg环境变量](./github/images/env.jpg)
 
-#### <a href="https://www.donationalerts.com/r/super_zombi">Support the project</a> (But now it's better to email me and I'll send you the details)
+## 3. 下载[GICutscenesUI-mod.exe](https://github.com/yohsinw/GICutscenesUI-mod/releases)
+
+下载`GICutscenesUI-mod.exe`，放入上述命令行工具`GICutscenes.exe`所在目录。
+
+## 4. 下载字幕文件
+
+在`GICutscenes.exe`所在目录打开命令行工具，执行如下命令：
+
+```shell
+git clone --depth 1 --filter=blob:none --sparse https://github.com/Dimbreath/GenshinData.git
+cd GenshinData
+git sparse-checkout set Subtitle
+```
+
+所有文件下载完成后，目录结果类似下图：
+```
+|-- GenshinData
+|    |-- Subtitle
+|        |-- CHS
+|        |-- ...
+|-- appsettings.json
+|-- GICutscenes.exe
+|-- GICutscenesUI-mod.exe
+|-- ...
+```
+
+## 5. 开始使用
+
+双击`GICutscenesUI-mod.exe`打开GUI程序，切换到`设置`页面，配置参数如下图：
+
+![参数配置](./github/images/config.jpg)
+
+切换到`主页`选项卡，选择过场动画`.usm`文件(`<安装目录>\Genshin Impact\Genshin Impact Game\YuanShen_Data\StreamingAssets\VideoAssets\StandaloneWindows64\`)，点击`开始`即可。
+
+## 视频合并硬件加速对比
+
+以爷直面雷神胸口拔刀的过场动画`Cs_200803_ShougunBossPart1_Girl.usm`为例，时长1'54'，合并日文配音+简中字幕。
+
+硬件配置:     
+
+Intel(R) Core(TM) i7-8850H CPU @ 2.60GHz
+
+NVIDIA Quadro P2000 with Max-Q Design 
+
+### 测试结果
+
+| 硬件 | speed(越大越快) | CPU占用 | 耗时(s) |
+| :--: | :--: | :--: | :--: |
+| 纯CPU | 1.2 | 100% | 94 |
+| 集显 | 6.5| ~60% | 22 |
+| 独显 | 8.6 | ~50% | 17 |
+
+PS: 所有82个过场动画中，有个别几个无法提取音频视频，原因暂未知。
+
+## 开发
+
+1. 开发环境
+
+Python 3 + eel + JSON-minify
+
+```shell
+pip install eel JSON-minify requests PyInstaller
+```
+
+2. 打包
+
+```shell
+$ cd GICutscenesUI
+$ ls
+main.py web
+$ python -m eel main.py web --onefile -n GICutscenesUI-mod
+```

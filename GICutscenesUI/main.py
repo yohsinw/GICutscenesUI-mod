@@ -326,8 +326,10 @@ def start_work(files, args):
 					else:
 						send_message_to_ui_output("event", "run_merge")
 						audio_index = int(args['audio_index'])
+						subtitle_type = args['subtitle_type']
+						hard_acc = args['hard_acc']
 						audio_file = os.path.join(OUTPUT_F , str(old_file_name) + "_" + str(audio_index) + ".wav")
-						output_file = os.path.join(OUTPUT_F, str(old_file_name) + ".mp4")
+						output_file = os.path.join(OUTPUT_F, str(old_file_name) + ".mkv")
 						send_message_to_ui_output("console", "\nStarting ffmpeg")
 						if os.path.exists(output_file):
 							send_message_to_ui_output("console", f'File {output_file} already exists.')
@@ -338,7 +340,19 @@ def start_work(files, args):
 						if CONSOLE_DEBUG_MODE:
 							subprocess.call(['ffmpeg', '-hide_banner', '-i', new_file_name, '-i', audio_file, output_file])
 						else:
-							process = subprocess.Popen(['ffmpeg', '-hide_banner', '-i', new_file_name, '-i', audio_file, output_file], encoding='utf-8', universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+							arr = ['ffmpeg', '-hide_banner', '-i', new_file_name, '-i', audio_file]
+
+							if(subtitle_type != 'NONE'):
+								sub_file = os.path.join(os.path.dirname(OUTPUT_F) + '\\GenshinData\\Subtitle\\' + subtitle_type + '\\', old_file_name + '_' + subtitle_type + '.srt')
+								if(os.path.exists(sub_file)):
+									arr += ['-i', sub_file, '-c:s', 'ass']
+
+							if(hard_acc == 'nvdia_gpu'):
+								arr += ['-c:v', 'h264_nvenc']
+							elif(hard_acc == 'intel_gpu'):
+								arr += ['-c:v', 'h264_qsv']
+							arr += ['-c:a', 'aac', '-y', output_file]
+							process = subprocess.Popen(arr, encoding='utf-8', universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 							with process.stderr:
 								log_subprocess_output(process.stderr, process)
 							p_status = process.wait()

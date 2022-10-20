@@ -12,7 +12,10 @@ function putMessageInOutput(type, message) {
 
 			if (message.toLowerCase().includes("duration")){
 				message.replace(/\Duration:(.*?)\,/g, (match, contents)=>{
-					maxDuration = durationToSeconds(contents.trim())
+					const rex = /(\d*:)+\d*/i
+					if(rex.test(contents.trim())) {
+						maxDuration = durationToSeconds(contents.trim())
+					}
 				})
 			}
 
