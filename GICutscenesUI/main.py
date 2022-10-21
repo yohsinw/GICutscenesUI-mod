@@ -331,7 +331,7 @@ def start_work(files, args):
 						subtitle_type = args['subtitle_type']
 						hard_acc = args['hard_acc']
 						audio_file = os.path.join(OUTPUT_F , str(old_file_name) + "_" + str(audio_index) + ".wav")
-						output_file = os.path.join(OUTPUT_F, str(old_file_name) + (".mkv" if subtitle_type == 'MKV' else ".mp4"))
+						output_file = os.path.join(OUTPUT_F, str(old_file_name) + ".mp4")
 						send_message_to_ui_output("console", "\nStarting ffmpeg")
 						if os.path.exists(output_file):
 							send_message_to_ui_output("console", f'File {output_file} already exists.')
@@ -347,19 +347,26 @@ def start_work(files, args):
 							if(subtitle != 'NONE'):
 								sub_file = os.path.join(os.path.dirname(OUTPUT_F) + '\\GenshinData\\Subtitle\\' + subtitle + '\\', old_file_name + '_' + subtitle + '.srt')
 								if(os.path.exists(sub_file)):
-									if(subtitle_type == 'MKV'):
-										arr += ['-i', sub_file, '-c:s', 'ass']
-										send_message_to_ui_output("console", "merge subtitle into mkv...")
+									if(subtitle_type == 'PACK'):
+										arr += ['-i', sub_file, '-c:s', 'mov_text']
+										send_message_to_ui_output("console", "subtitle mode: PACK")
 									else:
 										arr += ['-vf', 'subtitles=\''+sub_file.replace("\\", "\\\\").replace(":", "\\:")+'\'']
-										send_message_to_ui_output("console", "merge subtitle into mp4...")
+										send_message_to_ui_output("console", "subtitle mode: EMBED")
 								else:
 									send_message_to_ui_output("console", "subtitle file not exists:" + sub_file)
 
 							if(hard_acc == 'nvdia_gpu'):
-								arr += ['-c:v', 'h264_nvenc']
+									arr += ['-c:v', 'h264_nvenc', '-b:v', '11000k']
 							elif(hard_acc == 'intel_gpu'):
-								arr += ['-c:v', 'h264_qsv']
+								arr += ['-c:v', 'h264_qsv', '-b:v', '11000k']
+							elif(hard_acc == 'amd_gpu'):
+								arr += ['-c:v', 'h264_amf', '-b:v', '11000k']
+							else:
+								if(subtitle != 'NONE'):
+									arr += ['-c:v', 'libvpx-vp9', '-b:v', '11000k']
+								# else:
+								# 	arr += ['-c:v', 'copy'] # 不选字幕和硬件加速时，直接复制原VP9视频流
 							arr += ['-c:a', 'aac', '-y', output_file]
 							process = subprocess.Popen(arr, encoding='utf-8', universal_newlines=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 							with process.stderr:

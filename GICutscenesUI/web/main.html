@@ -104,7 +104,7 @@
 		<hr>
 
 		<p>
-			<input type="checkbox" id="merge" name="merge" class="settings_element">
+			<input type="checkbox" id="merge" name="merge" class="settings_element" onclick="mergeChanged(this.checked)">
 			<span class="info_icon" translation="__title:using_ffmpeg_promt__" title="With using ffmpeg"></span>
 			<label for="merge" translation="__merge__">Merge Video and Audio</label>
 
@@ -118,25 +118,28 @@
 		<p>
 			<label for="merge_sub" translation="__merge_sub__">合并字幕</label>
 
-			<select class="settings_element" name="subtitle" style="margin-left:10px;" translation="__title:sub_index_promt__" title="sub index">
+			<select class="settings_element" name="subtitle" style="margin-left:10px;" translation="__title:sub_index_promt__" title="sub index"
+				onchange="subtitleChanged(this.options[this.options.selectedIndex].value)">
 				<option value="NONE" selected>无</option>
 				<option value="CHS">简体中文</option>
 				<option value="CHT">繁體中文</option>
 				<option value="EN">English</option>
 				<option value="JP">Japanese</option>
+				<option value="KR">한국인</option>
 			</select>
-			<select class="settings_element" name="subtitle_type" style="margin-left:10px;" translation="__title:sub_type_promt__" title="sub type">
-				<option value="MKV">mkv内挂字幕</option>
-				<option value="MP4" selected>mp4嵌入字幕</option>
+			<select class="settings_element" name="subtitle_type" style="margin-left:10px;display: none" translation="__title:sub_type_promt__" title="sub type">
+				<option value="PACK" selected>内挂字幕</option>
+				<option value="EMBED">嵌入字幕</option>
 			</select>
 		</p>
 		<p>
 			<label for="hard_acc" translation="__hard_acc__">视频编码硬件加速</label>
 
 			<select class="settings_element" name="hard_acc" style="margin-left:10px;" translation="__title:hard_acc_promt__" title="hard acc">
-				<option value="NONE" selected>不使用</option>
-				<option value="nvdia_gpu">Nvdia独显</option>
-				<option value="intel_gpu">Intel集显</option>
+				<option value="NONE">不使用</option>
+				<option value="nvdia_gpu">Nvdia显卡</option>
+				<option value="intel_gpu" selected>Intel集显</option>
+				<option value="amd_gpu">AMD显卡(测试)</option>
 			</select>
 		</p>
 		<p>

@@ -2,9 +2,9 @@
 -- modified by yohsinw
 
 > 本项目为[ToaHartor/GI-cutscenes](https://github.com/ToaHartor/GI-cutscenes)命令行工具的GUI版，fork自[SuperZombi/GICutscenesUI](https://github.com/SuperZombi/GICutscenesUI)，并做一定修改：
-> 1. 使用ffmpeg合并视频、音频时，可选Nvdia/Intel GPU加速(自测比原作纯CPU方案约快3-5倍);
-> 2. 合并视频、音频可选合并多语言字幕；
-> 3. 可选择将字幕合并为内挂字幕(输出.mkv文件)或内嵌硬字幕(输出.mp4文件)。
+> 1. 使用ffmpeg合并视频、音频时，均输出为H264编码(导出原文件为VP9编码)，且可选硬件加速(AMD GPU加速为测试功能，有问题请反馈);
+> 2. 合并视频、音频时可选合并多语言字幕；
+> 3. 可选择将字幕合并为内挂字幕或内嵌硬字幕。
 
 > PS: 内挂字幕可利用视频编辑软件将字幕流移除，需要播放器支持字幕渲染，如VLC(需手动选择字幕轨道)、Potplayer。
 > 内嵌字幕为将字母文字以类似水印的方式添加到视频的每帧画面，无法移除，对播放器无要求。
@@ -14,11 +14,15 @@
 
 ## 使用方法
 
-### 1. 下载命令行工具
+### 1. 下载命令行工具及最新的 `versions.json`文件
 
 下载地址: [ToaHartor/GI-cutscenes](https://github.com/ToaHartor/GI-cutscenes)
 
-推荐下载`standalone`版，如`GICutscenes-xxx-win-x64-standalone.zip`版本，并解压;
+推荐下载`standalone`版，如`GICutscenes-xxx-win-x64-standalone.zip`版本，并解压。
+
+
+**☆☆☆☆☆重要的事情说三遍！！重要的事情说三遍！！重要的事情说三遍！！下载新版[`versions.json`(右键另存为)](https://raw.githubusercontent.com/ToaHartor/GI-cutscenes/main/versions.json)，替换上面解压目录中的同名文件！！**
+
 
 ### 2. 下载安装FFmpeg
 
@@ -79,8 +83,6 @@ NVIDIA Quadro P2000 with Max-Q Design
 | 纯CPU | 1.2 | 100% | 94 |
 | 集显 | 6.5| ~60% | 22 |
 | 独显 | 8.6 | ~50% | 17 |
-
-PS: 所有82个过场动画中，有个别几个无法提取音频视频，原因暂未知。
 
 ## 开发
 

@@ -11,6 +11,11 @@ async function load_settings(){
 			}		
 		}
 	})
+	sub = document.getElementsByName('subtitle')[0]
+	subtitleChanged(sub.options[sub.options.selectedIndex].value)
+
+	merge = document.getElementsByName('merge')[0]
+	subtitleChanged(merge.checked)
 }
 async function exportSettings(){
 	let settings = parseSettings()
@@ -57,5 +62,17 @@ function changeTheme(){
 	}
 	else{
 		document.body.classList.remove('dark')
+	}
+}
+
+function subtitleChanged(sub) {
+	document.getElementsByName('subtitle_type')[0].style.display = sub == 'NONE' ? 'none' : 'inline';
+}
+
+function mergeChanged(checked) {
+	if(!checked) {
+		sub = document.getElementsByName('subtitle')[0]
+		sub.selectedIndex = 0
+		subtitleChanged(sub.options[sub.options.selectedIndex].value)
 	}
 }
