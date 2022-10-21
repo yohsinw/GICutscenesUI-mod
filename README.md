@@ -20,7 +20,7 @@
 
 推荐下载`standalone`版，如`GICutscenes-xxx-win-x64-standalone.zip`版本，并解压;
 
-## 2. 下载安装FFmpeg
+### 2. 下载安装FFmpeg
 
 下载地址：[FFmpeg build by BtbN](https://github.com/BtbN/FFmpeg-Builds/releases)
 
@@ -28,11 +28,11 @@
 
 ![FFmpeg环境变量](./github/images/env.jpg)
 
-## 3. 下载[GICutscenesUI-mod.exe](https://github.com/yohsinw/GICutscenesUI-mod/releases)
+### 3. 下载[GICutscenesUI-mod.exe](https://github.com/yohsinw/GICutscenesUI-mod/releases)
 
 下载`GICutscenesUI-mod.exe`，放入上述命令行工具`GICutscenes.exe`所在目录。
 
-## 4. 下载字幕文件
+### 4. 下载字幕文件
 
 在`GICutscenes.exe`所在目录打开命令行工具，执行如下命令：
 
@@ -54,7 +54,7 @@ git sparse-checkout set Subtitle
 |-- ...
 ```
 
-## 5. 开始使用
+### 5. 开始使用
 
 双击`GICutscenesUI-mod.exe`打开GUI程序，切换到`设置`页面，配置参数如下图：
 
@@ -92,7 +92,9 @@ Python 3 + eel + JSON-minify
 pip install eel JSON-minify requests PyInstaller
 ```
 
-2. 打包
+2. 字幕文件`GenshinData`下载到项目根目录
+
+3. 打包
 
 ```shell
 $ cd GICutscenesUI
