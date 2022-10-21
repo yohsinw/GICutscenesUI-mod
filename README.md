@@ -3,7 +3,14 @@
 
 > 本项目为[ToaHartor/GI-cutscenes](https://github.com/ToaHartor/GI-cutscenes)命令行工具的GUI版，fork自[SuperZombi/GICutscenesUI](https://github.com/SuperZombi/GICutscenesUI)，并做一定修改：
 > 1. 使用ffmpeg合并视频、音频时，可选Nvdia/Intel GPU加速(自测比原作纯CPU方案约快3-5倍);
-> 2. 合并视频、音频可选合并多语言字幕。
+> 2. 合并视频、音频可选合并多语言字幕；
+> 3. 可选择将字幕合并为内挂字幕(输出.mkv文件)或内嵌硬字幕(输出.mp4文件)。
+
+> PS: 内挂字幕可利用视频编辑软件将字幕流移除，需要播放器支持字幕渲染，如VLC(需手动选择字幕轨道)、Potplayer。
+> 内嵌字幕为将字母文字以类似水印的方式添加到视频的每帧画面，无法移除，对播放器无要求。
+
+## 合并后效果
+![capture](./github/images/capture.jpg)
 
 ## 使用方法
 
@@ -35,7 +42,7 @@ cd GenshinData
 git sparse-checkout set Subtitle
 ```
 
-所有文件下载完成后，目录结果类似下图：
+所有文件下载完成后，目录结构类似下图：
 ```
 |-- GenshinData
 |    |-- Subtitle
@@ -53,7 +60,7 @@ git sparse-checkout set Subtitle
 
 ![参数配置](./github/images/config.jpg)
 
-切换到`主页`选项卡，选择过场动画`.usm`文件(`<安装目录>\Genshin Impact\Genshin Impact Game\YuanShen_Data\StreamingAssets\VideoAssets\StandaloneWindows64\`)，点击`开始`即可。
+切换到`主页`选项卡，选择过场动画`.usm`文件(`<原神安装目录>\Genshin Impact\Genshin Impact Game\YuanShen_Data\StreamingAssets\VideoAssets\StandaloneWindows64\`)，点击`开始`即可。
 
 ## 视频合并硬件加速对比
 

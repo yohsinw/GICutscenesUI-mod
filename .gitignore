@@ -1,4 +1,4 @@
 GICutscenesUI/dist
 GICutscenesUI/build
 *.spec
-*/output
+output/

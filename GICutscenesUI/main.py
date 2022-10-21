@@ -1,3 +1,4 @@
+from dataclasses import replace
 from tkinter import Tk
 from tkinter.filedialog import askdirectory, askopenfilename, askopenfilenames
 import eel
@@ -10,7 +11,7 @@ import re
 import requests
 
 CONSOLE_DEBUG_MODE = False
-__version__ = '0.4.3.1'
+__version__ = '0.4.0.1'
 
 # ---- Required Functions ----
 
@@ -326,10 +327,11 @@ def start_work(files, args):
 					else:
 						send_message_to_ui_output("event", "run_merge")
 						audio_index = int(args['audio_index'])
+						subtitle = args['subtitle']
 						subtitle_type = args['subtitle_type']
 						hard_acc = args['hard_acc']
 						audio_file = os.path.join(OUTPUT_F , str(old_file_name) + "_" + str(audio_index) + ".wav")
-						output_file = os.path.join(OUTPUT_F, str(old_file_name) + ".mkv")
+						output_file = os.path.join(OUTPUT_F, str(old_file_name) + (".mkv" if subtitle_type == 'MKV' else ".mp4"))
 						send_message_to_ui_output("console", "\nStarting ffmpeg")
 						if os.path.exists(output_file):
 							send_message_to_ui_output("console", f'File {output_file} already exists.')
@@ -342,10 +344,17 @@ def start_work(files, args):
 						else:
 							arr = ['ffmpeg', '-hide_banner', '-i', new_file_name, '-i', audio_file]
 
-							if(subtitle_type != 'NONE'):
-								sub_file = os.path.join(os.path.dirname(OUTPUT_F) + '\\GenshinData\\Subtitle\\' + subtitle_type + '\\', old_file_name + '_' + subtitle_type + '.srt')
+							if(subtitle != 'NONE'):
+								sub_file = os.path.join(os.path.dirname(OUTPUT_F) + '\\GenshinData\\Subtitle\\' + subtitle + '\\', old_file_name + '_' + subtitle + '.srt')
 								if(os.path.exists(sub_file)):
-									arr += ['-i', sub_file, '-c:s', 'ass']
+									if(subtitle_type == 'MKV'):
+										arr += ['-i', sub_file, '-c:s', 'ass']
+										send_message_to_ui_output("console", "merge subtitle into mkv...")
+									else:
+										arr += ['-vf', 'subtitles=\''+sub_file.replace("\\", "\\\\").replace(":", "\\:")+'\'']
+										send_message_to_ui_output("console", "merge subtitle into mp4...")
+								else:
+									send_message_to_ui_output("console", "subtitle file not exists:" + sub_file)
 
 							if(hard_acc == 'nvdia_gpu'):
 								arr += ['-c:v', 'h264_nvenc']

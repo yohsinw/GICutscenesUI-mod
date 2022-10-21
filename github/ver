@@ -16,11 +16,11 @@ VSVersionInfo(
         u'040904B0',
         [
         StringStruct(u'FileDescription', u'Genshin Impact Cutscenes'),
-        StringStruct(u'FileVersion', u'0.4.3.1'),
-        StringStruct(u'InternalName', u'GICutscenesUI'),
-        StringStruct(u'OriginalFilename', u'GICutscenesUI.exe'),
-        StringStruct(u'ProductName', u'GI-Cutscenes UI'),
-        StringStruct(u'ProductVersion', u'0.4.3.1')])
+        StringStruct(u'FileVersion', u'0.4.0.1'),
+        StringStruct(u'InternalName', u'GICutscenesUI-mod'),
+        StringStruct(u'OriginalFilename', u'GICutscenesUI-mod.exe'),
+        StringStruct(u'ProductName', u'GI-Cutscenes UI-mod'),
+        StringStruct(u'ProductVersion', u'0.4.0.1')])
       ]), 
     VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
   ]
