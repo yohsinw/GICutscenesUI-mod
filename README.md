@@ -19,9 +19,17 @@
 [下载地址1](https://pan.baidu.com/s/1B09d4RgsDeeQrQx01Kv5kQ?pwd=gi31)
 [下载地址2](https://wwc.lanzoub.com/ibhGw0ebqdkf)
 
-解压后直接跳到[5-开始使用](#5-开始使用)
+下载懒人包解压后，先按[1. 下载安装FFmpeg](#1-下载安装ffmpeg)完成ffmpeg安装和设置，然后直接跳到[5-开始使用](#5-开始使用)
 
-### 1. 下载命令行工具及最新的 `versions.json`文件
+### 1. 下载安装FFmpeg
+
+下载地址：[FFmpeg build by BtbN](https://github.com/BtbN/FFmpeg-Builds/releases)
+
+推荐下载`gpl`版，如`ffmpeg-master-latest-win64-gpl.zip`, 解压到某一目录，然后将`bin`目录添加到环境变量，如下：
+
+![FFmpeg环境变量](./github/images/env.jpg)
+
+### 2. 下载命令行工具及最新的 `versions.json`文件
 
 下载地址: [ToaHartor/GI-cutscenes](https://github.com/ToaHartor/GI-cutscenes)
 
@@ -30,14 +38,6 @@
 
 **☆☆☆☆☆重要的事情说三遍！！重要的事情说三遍！！重要的事情说三遍！！下载新版[`versions.json`(右键另存为)](https://raw.githubusercontent.com/ToaHartor/GI-cutscenes/main/versions.json)，替换上面解压目录中的同名文件！！**
 
-
-### 2. 下载安装FFmpeg
-
-下载地址：[FFmpeg build by BtbN](https://github.com/BtbN/FFmpeg-Builds/releases)
-
-推荐下载`gpl`版，如`ffmpeg-master-latest-win64-gpl.zip`, 解压到某一目录，然后将`bin`目录添加到环境变量，如下：
-
-![FFmpeg环境变量](./github/images/env.jpg)
 
 ### 3. 下载[GICutscenesUI-mod.exe](https://github.com/yohsinw/GICutscenesUI-mod/releases)
 
@@ -95,7 +95,7 @@ NVIDIA Quadro P2000 with Max-Q Design
 
 1. 开发环境
 
-Python 3 + eel + JSON-minify
+Python 3.8+ + eel + JSON-minify
 
 ```shell
 pip install eel JSON-minify requests PyInstaller
