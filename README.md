@@ -14,6 +14,13 @@
 
 ## 使用方法
 
+### 0. 懒人包
+
+[下载地址1](https://pan.baidu.com/s/1B09d4RgsDeeQrQx01Kv5kQ?pwd=gi31)
+[下载地址2](https://wwc.lanzoub.com/ibhGw0ebqdkf)
+
+解压后直接跳到[5-开始使用](#5-开始使用)
+
 ### 1. 下载命令行工具及最新的 `versions.json`文件
 
 下载地址: [ToaHartor/GI-cutscenes](https://github.com/ToaHartor/GI-cutscenes)
