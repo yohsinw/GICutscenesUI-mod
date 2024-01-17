@@ -2,7 +2,7 @@
 -- modified by yohsinw
 
 > 本项目为[ToaHartor/GI-cutscenes](https://github.com/ToaHartor/GI-cutscenes)命令行工具的GUI版，fork自[SuperZombi/GICutscenesUI](https://github.com/SuperZombi/GICutscenesUI)，并做一定修改：
-> 1. 使用ffmpeg合并视频、音频时，均输出为H264编码(导出原文件为VP9编码)，且可选硬件加速(AMD GPU加速为测试功能，有问题请反馈);
+> 1. 使用ffmpeg合并视频、音频时，均输出为H264编码(导出原文件为VP9编码)，且可选集显或独显硬件加速(AMD GPU加速为测试功能，本人无AMD GPU);
 > 2. 合并视频、音频时可选合并多语言字幕；
 > 3. 可选择将字幕合并为内挂字幕或内嵌硬字幕。
 
@@ -18,14 +18,15 @@
 
 [下载地址1](https://pan.baidu.com/s/1B09d4RgsDeeQrQx01Kv5kQ?pwd=gi31)
 [下载地址2](https://wwc.lanzoub.com/ibhGw0ebqdkf)
+[B站专栏](https://www.bilibili.com/read/cv19236413/)评论区不定时更新。
 
-下载懒人包解压后，先按[1. 下载安装FFmpeg](#1-下载安装ffmpeg)完成ffmpeg安装和设置，然后直接跳到[5-开始使用](#5-开始使用)
+**重要！！重要！！重要！！**：下载懒人包解压后，先按[1. 下载安装FFmpeg](#1-下载安装ffmpeg)完成ffmpeg安装和设置，然后更新versions文件(下述步骤2或B站评论区不定时更新),然后**直接跳到[5-开始使用](#5-开始使用)**。
 
 ### 1. 下载安装FFmpeg
 
 下载地址：[FFmpeg build by BtbN](https://github.com/BtbN/FFmpeg-Builds/releases)
 
-推荐下载`gpl`版，如`ffmpeg-master-latest-win64-gpl.zip`, 解压到某一目录，然后将`bin`目录添加到环境变量，如下：
+推荐下载`gpl`版，如`ffmpeg-master-latest-win64-gpl.zip`, 解压到某一目录，然后将`bin`目录添加到`PATH`环境变量，如下：
 
 ![FFmpeg环境变量](./github/images/env.jpg)
 
@@ -36,7 +37,7 @@
 推荐下载`standalone`版，如`GICutscenes-xxx-win-x64-standalone.zip`版本，并解压。
 
 
-**☆☆☆☆☆重要的事情说三遍！！重要的事情说三遍！！重要的事情说三遍！！下载新版[`versions.json`(右键另存为)](https://raw.githubusercontent.com/ToaHartor/GI-cutscenes/main/versions.json)，替换上面解压目录中的同名文件！！**
+**☆☆☆☆☆重要的事情说三遍！！重要的事情说三遍！！重要的事情说三遍！！下载新版[`versions.json`(右键另存为)](https://raw.githubusercontent.com/ToaHartor/GI-cutscenes/main/versions.json)，替换上面解压目录中的同名文件！！最新versions没更新的可以去pr里看看有没有大佬提交**
 
 
 ### 3. 下载[GICutscenesUI-mod.exe](https://github.com/yohsinw/GICutscenesUI-mod/releases)
@@ -48,7 +49,7 @@
 在`GICutscenes.exe`所在目录打开命令行工具，执行如下命令：
 
 ```shell
-git clone --depth 1 --filter=blob:none --sparse https://github.com/Dimbreath/GenshinData.git
+git clone --depth 1 --filter=blob:none --sparse https://gitlab.com/Dimbreath/AnimeGameData GenshinData
 cd GenshinData
 git sparse-checkout set Subtitle
 ```
@@ -75,7 +76,7 @@ git sparse-checkout set Subtitle
 
 ## 视频合并硬件加速对比
 
-以爷直面雷神胸口拔刀的过场动画`Cs_200803_ShougunBossPart1_Girl.usm`为例，时长1'54'，合并日文配音+简中字幕。
+以爷直面雷神胸口拔刀的过场动画`Cs_200803_ShougunBossPart1_Girl.usm`为例，时长1'54"，合并日文配音+简中字幕。
 
 硬件配置:     
 
@@ -88,8 +89,8 @@ NVIDIA Quadro P2000 with Max-Q Design
 | 硬件 | speed(越大越快) | CPU占用 | 耗时(s) |
 | :--: | :--: | :--: | :--: |
 | 纯CPU | 1.2 | 100% | 94 |
-| 集显 | 6.5| ~60% | 22 |
-| 独显 | 8.6 | ~50% | 17 |
+| Intel集显 | 6.5| ~60% | 22 |
+| Nv独显 | 8.6 | ~50% | 17 |
 
 ## 开发
 
